@@ -52,7 +52,7 @@ def donor():
             create_donor_object(session["uid"], cost, desc, quantity, title, weight, volume)
             return redirect("/welcome")
         else:
-            if "donor" in person["account_type"]:
+            if "donor" in session["account_type"]:
                 return render_template("list_order_donor.html", person=session)
             else:
                 return render_template("welcome.html", person=session)
