@@ -18,9 +18,16 @@ exports.order_matchUsers = db.ref('/orders/{orderID}').onCreate((snapshot, conte
   // Grab current value of what was written to realtime DB (See docs for boilerplate)
   const original = snapshot.val();
 
+  const donor = (db.ref('users/' + original.participants.u_donor));
+  // Find a distributor, static or not
+  var distributor = Find_A_Distributor(donor.address1 + " " + donor.address2, !donor.static);
+  original.participants.u_dist = distributor;
+  // Now call the app to map:
+
   // Must return a Promise when performing async tasks
   return snapshot.ref.parent.child();
 });
+
 
 // We cannot guarantee a return on the creation of an order, so as soon as someone goes online, let's find orders to match
 exports.user_matchOrders = db.ref('/users/{userID}/static').onUpdate((change, context) => {
@@ -41,8 +48,8 @@ exports.user_matchOrders = db.ref('/users/{userID}/static').onUpdate((change, co
     // A distributor always has the opposite static value to its serviced customer or donor
     var distributor = Find_A_Distributor((aRef.child('address1') + ' ' + aRef.child(address2)), !(aRef.child('static')));
 
-
     // Now we run the superficial logic to instruct users
+
   }
   else if (usertype == "distributor") {
 
