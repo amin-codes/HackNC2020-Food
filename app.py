@@ -2,7 +2,7 @@ import firebase_admin
 import pyrebase
 import json
 from firebase_admin import credentials
-from flask import Flask, Request, render_template, redirect, url_for, request
+from flask import Flask, Request, render_template, redirect, url_for, request, make_response
 import os
 base = os.getcwd()
 app = Flask(__name__)
@@ -18,6 +18,26 @@ db = pb.database()
 person = {"is_logged_in": False, "name": "", "email": "", "uid": "", "verified_email":False, "address1":"", "address2":"", "city":"", "state":"", "zip":"", "account_type":"", "isSponsored":False}
 attributes = ["name", "verified_email", "address1", "address2", "city", "state", "zip", "account_type", "isSponsored"]
 
+''''
+def generate_person_cookie(uid, email, template_function):
+    r = Flask.make_response(render_template(url_for(template_function)))
+    r.set_cookie("uid", value=uid, max_age=60*60*24*15)
+    r.set_cookie("email", value=email, max_age=60*60*24*15)
+    r.set_cookie("is_logged_in", True, max_age=60*60*24*15)
+    return r
+def get_person_cookie():
+    person = {"is_logged_in": False, "name": "", "email": "", "uid": "", "verified_email": False, "address1": "",
+              "address2": "", "city": "", "state": "", "zip": "", "account_type": "", "isSponsored": False}
+    person["is_logged_in"] = request.cookies.get("is_logged_in")
+    uid = request.cookies.get("uid")
+    email = request.cookies.get("email")
+    person["email"] = email
+    person["uid"] = uid
+    other_attr = db.child("users").child(uid).get()
+    for i in attributes:
+        person[i] = other_attr[i]
+    return person
+'''
 #Login
 @app.route("/")
 def login():
@@ -28,11 +48,44 @@ def login():
 def signup():
     return render_template("signup.html")
 
+@app.route("/donor", methods = ["POST", "GET"])
+def donor():
+    if person["is_logged_in"]:
+        if request.method == "POST":
+            result = request.form
+            title = result["title"]
+            desc = result["desc"]
+            cost = result["cost"]
+            weight = result["weight_lbs"]
+            volume = result["volume_in"]
+            quantity = result["quantity"]
+            create_donor_object(person["uid"], cost, desc, quantity, title, weight, volume)
+            return redirect("/welcome")
+        else:
+            if "donor" in person["account_type"]:
+                return render_template("list_order_donor.html", person=person)
+            else:
+                return render_template("welcome.html", person=person)
+    else:
+        return redirect(url_for('login'))
+
+def create_donor_object(uid, cost, desc, quantity, title, weight_lbs, volume_in):
+    #orders = db.child("orders")
+
+    import random
+    mx = random.randint(0, 1000)
+    object_id = title + "-" + str(mx)
+    while (object_id in db.child("orders").get().key()):
+        mx = random.randint(0, 1000)
+        object_id = title + "-" + str(mx)
+    data = {"cost": cost, "desc":desc, "listed":True, "quantity":quantity, "title":title, "volume_in":volume_in, "weight_lbs":weight_lbs, "participants":{"u_donor":uid}}
+    db.child("orders").child(object_id).set(data)
 #Welcome page
 @app.route("/welcome")
 def welcome():
-    if person["is_logged_in"] == True:
-        return render_template("welcome.html", email = person["email"], name = person["name"], account_type = person["account_type"], isSponsored = person["isSponsored"], address1=person["address1"], address2=person["address2"], city = person["city"], state=person["state"],zip=person["zip"])
+    #logged = request.cookies.get("is_logged_in") if "is_logged_in" in request.cookies else False
+    if person["is_logged_in"]:
+        return render_template("welcome.html", person = person)
     else:
         return redirect(url_for('login'))
 
