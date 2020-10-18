@@ -26,7 +26,7 @@ function initMap(location){
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(directionsMap);
-  let destination = new google.maps.LatLng(47.6795273,-70.8697928); //replace these with actual destination
+  let destination = new google.maps.LatLng(41.8781, 87.6298); //replace these with actual destination
 
   calcRoute(location, destination);
 
@@ -53,6 +53,5 @@ function calcRoute(start, destination){
         label: 'destination'
       });
     }
-
   })
 }
