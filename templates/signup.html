@@ -17,7 +17,7 @@
     </div>
 
     <!-- Login Form -->
-    <form action="http://127.0.0.1:5000/register" method="POST">
+    <form name="sign_up_form" action="/register" method="POST" onsubmit="return validateForm()">
       <input type="text" id="name" class="fadeIn second" name="name" placeholder="Personal name/Organization name">
       <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
       <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password">
@@ -37,6 +37,22 @@
       <input type="submit" class="fadeIn fourth" value="Sign Up">
     </form>
 
+      <script>
+          function validateForm(){
+              var form= document.forms["sign_up_form"];
+              var address1 = form["address1"].value;
+              var password = form["pass"].value;
+              var email = form["email"].value;
+              var state = form["state"].value;
+              var city = form["city"].value;
+              var zip = form["zip"].value;
+
+              if (address1=="" || password=="" || email=="" || state=="" || city=="" || zip=="") {
+                  alert("Make sure all fields are filled out. The only optional fields are Address Line 2 and Sponsorship.");
+                  return false;
+              }
+          }
+          </script>
   </div>
 </div>
 </body>
