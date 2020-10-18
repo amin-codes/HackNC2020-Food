@@ -15,17 +15,24 @@ pb = pyrebase.initialize_app(json.load(open(os.path.normpath(base+'/fbconfig.jso
 
 auth = pb.auth()
 db = pb.database()
-#session = {"is_logged_in": False, "name": "", "email": "", "uid": "", "verified_email":False, "address1":"", "address2":"", "city":"", "state":"", "zip":"", "account_type":"", "isSponsored":False, "static":False}
+person = {"is_logged_in": False, "name": "", "email": "", "uid": "", "verified_email":False, "address1":"", "address2":"", "city":"", "state":"", "zip":"", "account_type":"", "isSponsored":False, "static":False}
 attributes = ["name", "verified_email", "address1", "address2", "city", "state", "zip", "account_type", "isSponsored", "static"]
 
 #Login
 @app.route("/")
 def login():
+    for x in person.keys():
+        session[x] = person[x]
+    session["is_logged_in"] = False
+
     return render_template("login.html")
 
 #Sign up/ Register
 @app.route("/signup")
 def signup():
+    for x in person.keys():
+        session[x] = person[x]
+    session["is_logged_in"] = False
     return render_template("signup.html")
 
 #Welcome page
@@ -44,7 +51,8 @@ def savesettings():
         try:
             response = result['static']
             static = True
-        except:
+        except Exception as e:
+            print(e)
             static = False
     data = {"static" : str(static)}
     db.child("users").child(session["uid"]).update(data)
@@ -83,7 +91,8 @@ def result():
                 session[i] = data.val()[session["uid"]][i]
             #Redirect to welcome page
             return redirect(url_for('welcome'))
-        except:
+        except Exception as e:
+            print(e)
             #If there is any error, redirect back to login
             return redirect(url_for('login'))
     else:
@@ -123,16 +132,20 @@ def register():
             auth.send_email_verification(session["uid"])
             #Go to welcome page
             return redirect(url_for('welcome'))
-        except:
+        except Exception as e:
+            print(e)
             #If there is any error, redirect to register
             return redirect(url_for('register'))
 
     else:
-        if session["is_logged_in"] == True:
-            return redirect(url_for('welcome'))
-        else:
-            return redirect(url_for('register'))
+        try:
+            if session["is_logged_in"] == True:
+                return redirect(url_for('welcome'))
+            else:
+                return redirect(url_for('signup'))
+        except Exception as e:
+            print(e)
+            return redirect(url_for('signup'))
 
 if __name__ == "__main__":
-    app.run()
-    session["is_logged_in"] = False
+    app.run(debug=True)
