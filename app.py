@@ -37,7 +37,6 @@ def welcome():
 #Settings
 @app.route("/savesettings", methods = ["POST", "GET"])
 def savesettings():
-    global session 
     if request.method == "POST":
         result = request.form
         static = False
@@ -113,7 +112,6 @@ def register():
             #Login the user
             user = auth.sign_in_with_email_and_password(email, password)
             #Add data to global session
-            global session
             session["is_logged_in"] = True
             session["email"] = user["email"]
             session["uid"] = user["localId"]
