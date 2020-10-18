@@ -6,6 +6,11 @@
 	<title>Food For All</title>
 	<link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
     <!--- Nav Bar--->
@@ -17,7 +22,7 @@
                 {% if account_type == "donor" %}
 				<li><a href="/donor">Donate</a></li>
                 {% endif %}
-				<li><a href="#">Get Food</a></li>
+				<li><a href="#choices">Get Food</a></li>
 				<li><a href="#">Deliver</a></li>
                 <li><a href="/settings">Settings</a></li>
 				<li>
@@ -31,13 +36,18 @@
     <!---Banner---->
 	<section class="banner">
 		<div class="banner-content">
-			<h1>Help Feed Those in Your Community That Need Food</h1>
-			<a href="#">HELP SOMEONE IN NEED NOW!</a>
+            {% if account_type == "donor" %}
+			    <h1>Help Feed Those in Your Community That Need Food</h1>
+			    <a href="/donor">HELP SOMEONE IN NEED NOW!</a>
+            {% else %}
+                <h1>Receive the Help You Deserve</h1>
+			    <a href="#choices">LOOK NOW!</a>
+            {% endif %}
 		</div>
 	</section>
 
 	<section class="full-width formated-section">
-		<h2 class="text-center font-oswald foodheader">Food Choices</h2><br>
+		<h2 id="choices" class="text-center font-oswald foodheader">Food Choices</h2><br>
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 carddesign">
