@@ -7,7 +7,6 @@ import os
 base = os.getcwd()
 app = Flask(__name__)
 app.secret_key = "asdfasfdasfdsafasddfsadfasdfsadfdas"
-base = "C:\\Users\\Amin Zamani\\PycharmProjects\\HackNC2020-Food"
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 #Connecting to firebase
 cred = credentials.Certificate(os.path.normpath(os.path.join(base,"fbAdminConfig.json"))) #this file is not in our repo for security reasons
