@@ -16,9 +16,9 @@ function getLocation(){
   });
 }
 
-function initMap(location){
+function initMap(){
   directionsMap = new google.maps.Map(document.querySelector('#directions-map'), {
-    center: location,
+    center: {lat:35.1252965, lng:-80.7911135},
     zoom: 16
   });
 
@@ -27,7 +27,7 @@ function initMap(location){
   directionsDisplay.setMap(directionsMap);
   let destination = new google.maps.LatLng(47.6795273,-70.8697928);
 
-  calcRoute(location, destination);
+  calcRoute({lat:35.1252965, lng:-80.7911135}, destination);
 
 }
 
