@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'settings.css') }}">
+    <style>
+        .fa-cog {
+            font-size: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <a href="/welcome"> <h2 class="inactive underlineHover">Home Page </h2></a>
+    <h2 class="active"> Preferences </h2>
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+        <i class="fa fa-cog w3-padding-64"></i>
+    </div>
+    <h2 class="userdesc"> Hello {{name}}</h2> <br>
+    <h2 class="userdesc"> You are currently registered as a {{role}}</h2> 
+    <!-- Login Form --> 
+    <form name="login_form" action="/savesettings" method="POST">
+        <h2 class="description">Able to move?</h2>
+        <label class="switch">
+            <input type="checkbox" name="static">
+            <span class="slider round"></span>
+          </label>
+      <input type="submit" class="fadeIn fourth" value="Save Settings">
+    </form>
+
+
+  </div>
+</div>
+</body>
+</html>

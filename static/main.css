@@ -28,8 +28,14 @@ h2 {
   color: #cccccc;
 }
 
-
-
+.userdesc{
+  font-size: 14px;
+  margin: 10px 8px 2px 8px;
+  color: black
+}
+.description{
+  color:black
+}
 /* STRUCTURE */
 
 .wrapper {
