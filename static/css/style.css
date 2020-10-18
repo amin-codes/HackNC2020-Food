@@ -85,7 +85,7 @@ html, body{
 .NavBarP-Nav{
 	position: absolute;
 	top: 0;
-	background-color: #73AD21;
+	background-color: #2082ad;
 }
 .NavBarP-Logo{
 	left: 0;
@@ -113,7 +113,7 @@ html, body{
 	transition: all .3s ease-in-out;
 }
 .NavBarP-Nav > ul > li > a:hover{
-	color: #315205;
+	color: #89c8e5;
 }
 /*====== Login ==*/
 .Login{
@@ -153,7 +153,7 @@ html, body{
 	padding: 0;
 	width: 100%;
 	height: 100%;
-	color: #9ad051;
+	color: #FFFFFF;
 	background-color: rgba(0, 22, 40, .6);
 	display: flex;
 	flex-direction: column;
@@ -169,27 +169,27 @@ html, body{
 }
 .banner-content a{
 	text-decoration: none;
-	color: #89b856;
+	color: #4eacd4;
 	padding: 9px 20px;
 	border: 1px solid #FFF;
 	text-transform: uppercase;
 	transition: all .3s ease-in-out;
 }
 .banner-content a:hover{
-	background-color: #73AD21;
+	background-color: #2082ad;
 	color: #333;
 }
 
 .carddesign {
 	border-radius: 25px;
-	background-color: #73AD21;
+	background-color: #2082ad;
 	padding: 10px;
 	margin: 10px;
 	width: 23%;
 }
 
 .foodheader {
-	background-color: #73AD21;
+	background-color: #2082ad;
 	border-radius: 25px;
 	margin: 10px 750px 10px 750px;
 	padding: 10px;
@@ -205,29 +205,30 @@ html, body{
 
 
 	26%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/Store.png');
 	}
 	50%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/Store.png');
 	}
 
 
 	51%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/young-girl.jpg');
 	}
 	75%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/young-girl.jpg');
 	}
 	
 
 	76%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/coronavirus.png');
 	}
 	100%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/coronavirus.png');
 	}
 
 }
+
 /*=======================================================================================================
 =                                        Media queries                                                  =
 ========================================================================================================*/
