@@ -135,4 +135,4 @@ def register():
 
 if __name__ == "__main__":
     app.run()
-    session["started"] = True
+    session["is_logged_in"] = False
