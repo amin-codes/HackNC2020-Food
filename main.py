@@ -94,21 +94,35 @@ def savesettings():
     if request.method == "POST":
         result = request.form
         static = False
+        is_spons = False
         try:
             response = result['static']
             static = True
         except Exception as e:
             print(e)
             static = False
+            is_spons = False
+        if session["account_type"] == "customer":
+            try:
+                r1 = result['sponso']
+                is_spons = True
+            except Exception as e:
+                print(e)
+                is_spons = False
+
     data = {"static" : str(static)}
     db.child("users").child(session["uid"]).update(data)
     session['static'] = str(static)
+    if session["account_type"] == "customer":
+        dat = {"isSponsored":str(is_spons)}
+        db.child("users").child(session["uid"]).update(dat)
+        session['isSponsored'] = str(is_spons)
     return redirect(url_for('settings'))
 
 @app.route("/settings")
 def settings():
     if session["is_logged_in"]:
-        return render_template("settings.html", name=session["name"], role=session["account_type"], static=session['static'])
+        return render_template("settings.html", name=session["name"], role=session["account_type"], static=session['static'], sponsor="-1" if session["account_type"]!="customer" else session["isSponsored"])
     else:
         return redirect(url_for('login'))
 #If someone clicks on login, they are redirected to /result
