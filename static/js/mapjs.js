@@ -15,7 +15,6 @@ function getLocation(){
     initMap(pos);
   });
 }
-
 function initMap(){
   directionsMap = new google.maps.Map(document.querySelector('#directions-map'), {
     center: {lat:35.1252965, lng:-80.7911135},
