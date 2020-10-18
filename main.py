@@ -83,7 +83,16 @@ def signup():
 
 #Welcome page
 @app.route("/welcome")
+
 def welcome():
+    try:
+        if session["is_logged_in"] == True:
+            pass
+    except:
+        for x in person.keys():
+            session[x] = person[x]
+        session["is_logged_in"] = False
+        return redirect("/")
     if session["is_logged_in"] == True:
         return render_template("welcome.html", email = session["email"], name = session["name"], account_type = session["account_type"], isSponsored = session["isSponsored"], address1=session["address1"], address2=session["address2"], city = session["city"], state=session["state"],zip=session["zip"])
     else:
