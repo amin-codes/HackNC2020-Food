@@ -8,9 +8,9 @@ base = os.getcwd()
 app = Flask(__name__)
 
 #Connecting to firebase
-cred = credentials.Certificate(os.path.normpath(os.path.join(base,"fbAdminConfig.json"))) #this file is not in our repo for security reasons
+cred = credentials.Certificate(os.path.normpath(os.path.join(base,"/fbAdminConfig.json"))) #this file is not in our repo for security reasons
 admin_fire= firebase_admin.initialize_app(cred)
-pb = pyrebase.initialize_app(json.load(open(os.path.normpath(base+'fbconfig.json'))))
+pb = pyrebase.initialize_app(json.load(open(os.path.normpath(base+'/fbconfig.json'))))
 
 auth = pb.auth()
 db = pb.database()
