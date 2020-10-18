@@ -205,26 +205,26 @@ html, body{
 
 
 	26%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/Store.png');
 	}
 	50%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/Store.png');
 	}
 
 
 	51%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/young-girl.jpg');
 	}
 	75%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/young-girl.jpg');
 	}
 	
 
 	76%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/coronavirus.png');
 	}
 	100%{
-		background-image: url('../assets/img/begging.png');
+		background-image: url('../assets/img/coronavirus.png');
 	}
 
 }
