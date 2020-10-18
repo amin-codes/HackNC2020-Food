@@ -30,6 +30,37 @@ def login():
         session["is_logged_in"] = False
     return render_template("login.html")
 
+@app.route("/donor", methods = ["POST", "GET"])
+def donor():
+    if person["is_logged_in"]:
+        if request.method == "POST":
+            result = request.form
+            title = result["title"]
+            desc = result["desc"]
+            cost = result["cost"]
+            weight = result["weight_lbs"]
+            volume = result["volume_in"]
+            quantity = result["quantity"]
+            create_donor_object(session["uid"], cost, desc, quantity, title, weight, volume)
+            return redirect("/welcome")
+        else:
+            if "donor" in person["account_type"]:
+                return render_template("list_order_donor.html", person=session)
+            else:
+                return render_template("welcome.html", person=session)
+    else:
+        return redirect(url_for('login'))
+def create_donor_object(uid, cost, desc, quantity, title, weight_lbs, volume_in):
+    #orders = db.child("orders")
+
+    import random
+    mx = random.randint(0, 1000)
+    object_id = title + "-" + str(mx)
+    while (object_id in db.child("orders").get().key()):
+        mx = random.randint(0, 1000)
+        object_id = title + "-" + str(mx)
+    data = {"cost": cost, "desc":desc, "listed":True, "quantity":quantity, "title":title, "volume_in":volume_in, "weight_lbs":weight_lbs, "participants":{"u_donor":uid}}
+    db.child("orders").child(object_id).set(data)
 #Sign up/ Register
 @app.route("/signup")
 def signup():
