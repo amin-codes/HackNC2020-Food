@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>List Donor Item | FoodForChange</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'main.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .fa-gift {
+            font-size: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <a href="/welcome"><h2 class="inactive underlineHover"> Home page </h2></a>
+    <h2 class="active">Donate Item</h2>
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+        <i class="fa fa-gift w3-padding-64"></i>
+    </div>
+
+    <!-- Login Form -->
+    <form name="list_order" action="/donor" method="POST" onsubmit="return validateForm()">
+        <input type="text" name="title" class="fadeIn second" placeholder="Title" required>
+        <input type="text" name="desc" maxlength="60" class="fadeIn second" placeholder="Description" required>
+        <label>
+            <input type="text" min="1" step="1" name="quantity" class="fadeIn third" placeholder="Quantity" required>
+        </label>
+        <br>
+        <label for="cost">$</label>
+        <label>
+            <input type="text" min="1" step="any" name="cost" class="fadeIn third" placeholder="Cost (USD)" required>
+        </label>
+        <br>
+        <label>
+            <input type="text" step="any" name="weight_lbs" class="fadeIn fourth" placeholder="Weight (lbs)" required>
+        </label>
+        <br>
+        <label>
+            <input type="text" step="any" name="volume_in" class="fadeIn fourth" placeholder="Volume (in^3)" required>
+        </label>
+        <input type="submit" class="fadeIn fourth" value="Add item">
+    </form>
+      <script>
+          function validateForm(){
+              var form= document.forms["list_order"];
+              var title = form["title"].value;
+              var desc = form["desc"].value;
+              var cost = form["cost"].value;
+              var weight = form["weight_lbs"].value;
+              var volume = form["volume_in"].value;
+              var quantity = form["quantity"].value;
+              if (title=="" || desc=="" || cost=="" || weight=="" || volume=="" || quantity == "") {
+                  alert("Make sure all fields are filled out. The only optional fields are Address Line 2 and Sponsorship.");
+                  return false;
+              }
+
+              if (isNaN(quantity) || isNaN(cost) || isNaN(weight) || isNaN(volume))
+              {
+                  alert("Please input a number for ALL of the following fields: cost, quantity, weight, volume.")
+                  return false;
+              }
+              if (!Number.isInteger(quantity))
+              {
+                  alert("Please make sure quantity is an integer")
+                  return false;
+              }
+          }
+          </script>
+  </div>
+</body>
+</html>
