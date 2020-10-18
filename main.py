@@ -21,18 +21,25 @@ attributes = ["name", "verified_email", "address1", "address2", "city", "state",
 #Login
 @app.route("/")
 def login():
-    for x in person.keys():
-        session[x] = person[x]
-    session["is_logged_in"] = False
-
+    try:
+        if session["is_logged_in"] == True:
+            return redirect("welcome")
+    except:
+        for x in person.keys():
+            session[x] = person[x]
+        session["is_logged_in"] = False
     return render_template("login.html")
 
 #Sign up/ Register
 @app.route("/signup")
 def signup():
-    for x in person.keys():
-        session[x] = person[x]
-    session["is_logged_in"] = False
+    try:
+        if session["is_logged_in"] == True:
+            return redirect("welcome")
+    except:
+        for x in person.keys():
+            session[x] = person[x]
+        session["is_logged_in"] = False
     return render_template("signup.html")
 
 #Welcome page
