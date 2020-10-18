@@ -1,0 +1,8 @@
+flask
+firebase_admin
+pyrebase
+flask_login
+flask_migrate
+flask_sqlalchemy
+flask_wtf
+wtforms
