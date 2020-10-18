@@ -14,7 +14,9 @@
 		<nav class="full-width NavBarP-Nav">
 			<ul class="full-width list-unstyled">
 				<li><a href="#">Home</a></li>
+                {% if account_type == "donor" %}
 				<li><a href="#">Donate</a></li>
+                {% endif %}
 				<li><a href="#">Get Food</a></li>
 				<li><a href="#">Deliver</a></li>
                 <li><a href="/settings">Settings</a></li>
