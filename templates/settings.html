@@ -10,6 +10,12 @@
             font-size: 200px;
         }
     </style>
+    <script>
+        var static = {{static}}
+        if (static.equals("True")){
+            document.getElementById("static").checked = true
+        }
+    </script>
 </head>
 <body>
 <div class="wrapper fadeInDown">
@@ -28,7 +34,7 @@
     <form name="login_form" action="/savesettings" method="POST">
         <h2 class="description">Unable to Move?</h2>
         <label class="switch">
-            <input type="checkbox" name="static">
+            <input type="checkbox" name="static" id="static">
             <span class="slider round"></span>
           </label>
       <input type="submit" class="fadeIn fourth" value="Save Settings">

@@ -63,12 +63,13 @@ def savesettings():
             static = False
     data = {"static" : str(static)}
     db.child("users").child(session["uid"]).update(data)
+    session['static'] = static
     return redirect(url_for('settings'))
 
 @app.route("/settings")
 def settings():
     if session["is_logged_in"]:
-        return render_template("settings.html", name=session["name"], role=session["account_type"])
+        return render_template("settings.html", name=session["name"], role=session["account_type"], static=session['static'])
     else:
         return redirect(url_for('login'))
 #If someone clicks on login, they are redirected to /result
