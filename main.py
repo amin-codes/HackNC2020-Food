@@ -94,21 +94,34 @@ def savesettings():
     if request.method == "POST":
         result = request.form
         static = False
+        is_spon = False
+
         try:
             response = result['static']
             static = True
         except Exception as e:
             print(e)
             static = False
-    data = {"static" : static}
+        if session["account_type"] == "customer":
+            try:
+                r1 = result['sponso']
+                is_spon = True
+            except Exception as e:
+                print(e)
+                is_spon = False
+    data = {"static" : str(static)}
     db.child("users").child(session["uid"]).update(data)
-    session['static'] = static
+    session['static'] = str(static)
+    if session["account_type"] == "customer":
+        dat = {"isSponsored": str(is_spon)}
+        db.child("users").child(session["uid"]).update(dat)
+        session["isSponsored"] = str(is_spon)
     return redirect(url_for('settings'))
 
 @app.route("/settings")
 def settings():
     if session["is_logged_in"]:
-        return render_template("settings.html", name=session["name"], role=session["account_type"], static=session['static'])
+        return render_template("settings.html", name=session["name"], role=session["account_type"], static=session['static'], sponsor="-1" if session["account_type"]!="customer" else session["isSponsored"])
     else:
         return redirect(url_for('login'))
 #If someone clicks on login, they are redirected to /result
@@ -174,11 +187,9 @@ def register():
             session["uid"] = user["localId"]
             session["name"] = name
             #Append data to the firebase realtime database
-            data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored), "static": False}
+            data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored), "static": str(False)}
             db.child("users").child(session["uid"]).set(data)
             auth.send_email_verification(session["uid"])
-            for x in data.keys():
-                session[x] = data[x]
             #Go to welcome page
             return redirect(url_for('welcome'))
         except Exception as e:

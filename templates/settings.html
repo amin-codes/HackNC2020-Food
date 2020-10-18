@@ -31,6 +31,13 @@
             <input type="checkbox" name="static" id="static">
             <span class="slider round"></span>
           </label>
+        {% if account_type == "customer" %}
+            <h2 class="description">Sponsored?</h2>
+            <label class="switch">
+                <input type="checkbox" name="sponso" id="sponso">
+                <span class="slider round"></span>
+            </label>
+        {% endif %}
       <input type="submit" class="fadeIn fourth" value="Save Settings">
     </form>
 
@@ -40,7 +47,13 @@
 <script>
     var static = "{{static}}"
     if (static == "True"){
-        document.getElementById("static").checked = true
+        document.getElementById("static").checked = true;
+    }
+
+    var sponsor = "{{ sponsor }}"
+    if (sponsor != "-1" && sponsor == "True")
+    {
+        document.getElementById("sponso").checked = true;
     }
 </script>
 </body>
