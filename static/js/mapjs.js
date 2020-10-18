@@ -1,4 +1,4 @@
-console.info('spa_directions.js loaded');
+console.info('script.js loaded');
 
 /* code for simple map */
 const directionsInfo = document.querySelector('#directions-info');
@@ -7,8 +7,8 @@ directionsButton.addEventListener('click', getLocation);
 let directionsService;
 let directionsDisplay;
 
-//Get's your current location
 function getLocation(){
+
   navigator.geolocation.getCurrentPosition(function(position) {
     directionsInfo.innerHTML = `You appear to be at: ${position.coords.latitude}, ${position.coords.longitude}`;
     var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -16,8 +16,7 @@ function getLocation(){
   });
 }
 
-//Creates the map
-function initMap(){
+function initMap(location){
   directionsMap = new google.maps.Map(document.querySelector('#directions-map'), {
     center: location,
     zoom: 16
@@ -26,13 +25,12 @@ function initMap(){
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   directionsDisplay.setMap(directionsMap);
-  let destination = new google.maps.LatLng(35.1252965, -80.7911135); //replace these with actual destination
+  let destination = new google.maps.LatLng(47.6795273,-70.8697928);
 
   calcRoute(location, destination);
 
 }
 
-//Calculates the route
 function calcRoute(start, destination){
   let request = {
     origin: start,
@@ -50,8 +48,9 @@ function calcRoute(start, destination){
       let marker = new google.maps.Marker({
         position: destination,
         map: directionsMap,
-        label: 'destination'
+        label: 'Destination'
       });
     }
+
   })
 }
