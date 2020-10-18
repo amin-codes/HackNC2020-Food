@@ -5,7 +5,6 @@ from firebase_admin import credentials
 from flask import Flask, Request, render_template, redirect, url_for, request
 import os
 base = os.getcwd()
-base = "C:\\Users\\Amin Zamani\\PycharmProjects\\HackNC2020-Food\\"
 app = Flask(__name__)
 
 #Connecting to firebase
