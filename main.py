@@ -6,7 +6,8 @@ from flask import Flask, Request, render_template, redirect, url_for, request, s
 import os
 base = os.getcwd()
 app = Flask(__name__)
-app.secret_key = "asdfasfdasfdsafasddfsadfasdfsadfdas"  
+app.secret_key = "asdfasfdasfdsafasddfsadfasdfsadfdas"
+base = "C:\\Users\\Amin Zamani\\PycharmProjects\\HackNC2020-Food"
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 #Connecting to firebase
 cred = credentials.Certificate(os.path.normpath(os.path.join(base,"fbAdminConfig.json"))) #this file is not in our repo for security reasons
@@ -94,7 +95,11 @@ def welcome():
         session["is_logged_in"] = False
         return redirect("/")
     if session["is_logged_in"] == True:
-        return render_template("welcome.html", email = session["email"], name = session["name"], account_type = session["account_type"], isSponsored = session["isSponsored"], address1=session["address1"], address2=session["address2"], city = session["city"], state=session["state"],zip=session["zip"])
+        options = {}
+        for i in db.child("orders").get().each():
+            options[i.key()] = i.val()
+
+        return render_template("welcome.html", email = session["email"], name = session["name"], account_type = session["account_type"], isSponsored = session["isSponsored"], address1=session["address1"], address2=session["address2"], city = session["city"], state=session["state"],zip=session["zip"], buying=options)
     else:
         return redirect(url_for('login'))
 #Settings

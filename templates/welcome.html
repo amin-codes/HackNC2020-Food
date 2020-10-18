@@ -49,6 +49,15 @@
 		<h2 id="choices" class="text-center font-oswald foodheader">Food Choices</h2><br>
 		<div class="container">
 			<div class="row">
+                {% if buying is defined %}
+                    {% for choice in buying.keys() %}
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 carddesign">
+                            <img src="../static/assets/img/Store.png" alt="{{ buying[choice]['title'] }}" class="img-responsive img-rounded">
+                            <h3 class="text-center">{{ buying[choice]['title'] }}</h3>
+                            <p class="text-center"> {{ buying[choice]['desc'] }} <br> Quantity: {{ buying[choice]['quantity'] }} <br> Weight (lbs): {{ buying[choice]['weight_lbs'] }} <br> Volume (in^3): {{ buying[choice]['volume_in'] }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 carddesign">
 					<img src="../static/assets/img/Store.png" alt="Sucursal" class="img-responsive img-rounded">
 					<h3 class="text-center">Food Choice 1</h3>
@@ -77,6 +86,7 @@
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit possimus tempore sint impedit cum.
 					</p>
 				</div>
+                {% endif %}
 			</div>
 		</div>
 	</section>
