@@ -177,8 +177,8 @@ def register():
             data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored), "static": False}
             db.child("users").child(session["uid"]).set(data)
             auth.send_email_verification(session["uid"])
-            for i in attributes:
-                session[i] = data[i]
+            for x in data.keys():
+                session[x] = data[x]
             #Go to welcome page
             return redirect(url_for('welcome'))
         except Exception as e:
