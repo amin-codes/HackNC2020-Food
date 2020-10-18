@@ -63,7 +63,7 @@
                   alert("Please input a number for ALL of the following fields: cost, quantity, weight, volume.")
                   return false;
               }
-              if (!Number.isInteger(quantity))
+              if (!Number.isInteger(parseFloat(quantity)))
               {
                   alert("Please make sure quantity is an integer")
                   return false;
