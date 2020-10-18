@@ -15,8 +15,8 @@ pb = pyrebase.initialize_app(json.load(open(os.path.normpath(base+'/fbconfig.jso
 auth = pb.auth()
 db = pb.database()
 
-person = {"is_logged_in": False, "name": "", "email": "", "uid": "", "verified_email":False, "address1":"", "address2":"", "city":"", "state":"", "zip":"", "account_type":"", "isSponsored":False}
-attributes = ["name", "verified_email", "address1", "address2", "city", "state", "zip", "account_type", "isSponsored"]
+person = {"is_logged_in": False, "name": "", "email": "", "uid": "", "verified_email":False, "address1":"", "address2":"", "city":"", "state":"", "zip":"", "account_type":"", "isSponsored":False, "static":False}
+attributes = ["name", "verified_email", "address1", "address2", "city", "state", "zip", "account_type", "isSponsored", "static"]
 
 #Login
 @app.route("/")
