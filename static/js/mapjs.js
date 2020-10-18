@@ -17,7 +17,7 @@ function getLocation(){
 }
 
 //Creates the map
-function initMap(location){
+function initMap(){
   directionsMap = new google.maps.Map(document.querySelector('#directions-map'), {
     center: location,
     zoom: 16
