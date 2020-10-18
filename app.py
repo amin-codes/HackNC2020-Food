@@ -48,7 +48,7 @@ def savesettings():
         except:
             static = False
     data = {"static" : str(static)}
-    db.child("users").child(person["uid"]).set(data)
+    db.child("users").child(person["uid"]).update(data)
     return redirect(url_for('settings'))
 
 @app.route("/settings")
