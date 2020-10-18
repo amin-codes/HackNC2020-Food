@@ -154,5 +154,12 @@ def register():
             print(e)
             return redirect(url_for('signup'))
 
+@app.route("/signout")
+def signout():
+    for x in person.keys():
+        session[x] = person[x]
+    session["is_logged_in"] = False
+    return redirect("/")
+
 if __name__ == "__main__":
     app.run(debug=True)
