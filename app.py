@@ -53,8 +53,7 @@ def savesettings():
 
 @app.route("/settings")
 def settings():
-    global person 
-    if person["is_logged_in"] == True:
+    if person["is_logged_in"]:
         return render_template("settings.html", name=person["name"], role=person["account_type"])
     else:
         return redirect(url_for('login'))
