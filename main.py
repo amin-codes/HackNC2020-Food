@@ -176,7 +176,6 @@ def register():
             #Append data to the firebase realtime database
             data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored), "static": False}
             db.child("users").child(session["uid"]).set(data)
-            auth.send_email_verification(session["uid"])
             for x in data.keys():
                 session[x] = data[x]
             #Go to welcome page
@@ -184,7 +183,7 @@ def register():
         except Exception as e:
             print(e)
             #If there is any error, redirect to register
-            return redirect(url_for('register'))
+            return redirect(url_for('signup'))
 
     else:
         try:
