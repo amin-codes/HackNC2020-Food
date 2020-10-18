@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Food For All</title>
+	<link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/mapstyle.css">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!--- Nav Bar--->
+	<header class="full-width NavBarP">
+		<div class="full-width NavBarP-Logo">Food For All</div>
+		<nav class="full-width NavBarP-Nav">
+			<ul class="full-width list-unstyled">
+				<li><a href="/welcome">Home</a></li>
+                {% if account_type == "donor" %}
+				<li><a href="/donor">Donate</a></li>
+                {% endif %}
+				<li><a href="#">Deliver</a></li>
+				<li><a href="/settings">Settings</a></li>
+				<li><a href="/signout"><i class="fa fa-sign-out"></i> Sign Out</a></li>
+			</ul>
+		</nav>
+		<i class="fa fa-bars visible-xs btn-menuMobile ShowMenuMobile" aria-hidden="true"></i>
+	</header>
+    <h1>{{ inform["title"] }}</h1>
+<section id="directions">
+		<h2>directions map</h2>
+		<button id="get-directions" >get directions</button><span id='directions-info'></span>
+		<p id="directions-info"></p>
+
+		<article id="directions-map">map should appear here</article>
+	</section>
+<script src="../static/js/mapjs.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVDiVBRarYWhPogDcsQr6Lun98o3MQDWA&callback=initMap" async defer></script>
+
+	<script src="../static/js/jquery-3.1.0.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/main.js"></script>
+</body>

@@ -30,6 +30,13 @@ def login():
         session["is_logged_in"] = False
     return render_template("login.html")
 
+@app.route("/donation/<string:donate_id>")
+def donation(donate_id):
+    info = {}
+    for i in db.child("orders").child(donate_id).get().each():
+        info[i.key()] = i.val()
+    return render_template("product_template.html", inform=info)
+
 @app.route("/donor", methods = ["POST", "GET"])
 def donor():
     try:

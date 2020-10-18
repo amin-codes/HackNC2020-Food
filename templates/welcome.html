@@ -48,14 +48,16 @@
 	<section class="full-width formated-section">
 		<h2 id="choices" class="text-center font-oswald foodheader">Food Choices</h2><br>
 		<div class="container">
-			<div class="row">
+			<a class="row">
                 {% if buying is defined %}
                     {% for choice in buying.keys() %}
+                        <a href="/donation/{{ choice }}">
                         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 carddesign">
                             <img src="../static/assets/img/Store.png" alt="{{ buying[choice]['title'] }}" class="img-responsive img-rounded">
                             <h3 class="text-center">{{ buying[choice]['title'] }}</h3>
                             <p class="text-center"> {{ buying[choice]['desc'] }} <br> Quantity: {{ buying[choice]['quantity'] }} <br> Weight (lbs): {{ buying[choice]['weight_lbs'] }} <br> Volume (in^3): {{ buying[choice]['volume_in'] }}</p>
                         </div>
+                        </a>
                     {% endfor %}
                 {% else %}
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 carddesign">
@@ -90,18 +92,6 @@
 			</div>
 		</div>
 	</section>
-
-    <section id="directions">
-		<h2>directions map</h2>
-		<button id="get-directions" >get directions</button><span id='directions-info'></span>
-		<p id="directions-info"></p>
-
-		<article id="directions-map">map should appear here</article>
-	</section>
-
-    <script src="../static/js/mapjs.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVDiVBRarYWhPogDcsQr6Lun98o3MQDWA&callback=initMap" async defer></script>
-
 	<script src="../static/js/jquery-3.1.0.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
 	<script src="../static/js/main.js"></script>
