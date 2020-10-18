@@ -94,29 +94,28 @@ def savesettings():
     if request.method == "POST":
         result = request.form
         static = False
-        is_spons = False
+        is_spon = False
+
         try:
             response = result['static']
             static = True
         except Exception as e:
             print(e)
             static = False
-            is_spons = False
         if session["account_type"] == "customer":
             try:
                 r1 = result['sponso']
-                is_spons = True
+                is_spon = True
             except Exception as e:
                 print(e)
-                is_spons = False
-
+                is_spon = False
     data = {"static" : str(static)}
     db.child("users").child(session["uid"]).update(data)
     session['static'] = str(static)
     if session["account_type"] == "customer":
-        dat = {"isSponsored":str(is_spons)}
+        dat = {"isSponsored": str(is_spon)}
         db.child("users").child(session["uid"]).update(dat)
-        session['isSponsored'] = str(is_spons)
+        session["isSponsored"] = str(is_spon)
     return redirect(url_for('settings'))
 
 @app.route("/settings")
