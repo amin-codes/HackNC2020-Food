@@ -122,7 +122,7 @@ def register():
             person["uid"] = user["localId"]
             person["name"] = name
             #Append data to the firebase realtime database
-            data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored)}
+            data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored), "static": str(False)}
             db.child("users").child(person["uid"]).set(data)
             auth.send_email_verification(person["uid"])
             #Go to welcome page
