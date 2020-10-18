@@ -100,9 +100,9 @@ def savesettings():
         except Exception as e:
             print(e)
             static = False
-    data = {"static" : str(static)}
+    data = {"static" : static}
     db.child("users").child(session["uid"]).update(data)
-    session['static'] = str(static)
+    session['static'] = static
     return redirect(url_for('settings'))
 
 @app.route("/settings")
@@ -174,7 +174,7 @@ def register():
             session["uid"] = user["localId"]
             session["name"] = name
             #Append data to the firebase realtime database
-            data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored), "static": str(False)}
+            data = {"name": name, "email": email, "address1":address_1, "address2":address_2, "city":city, "state":state, "zip":zip, "account_type":account_type, "verified_email":str(False), "isSponsored":str(is_sponsored), "static": False}
             db.child("users").child(session["uid"]).set(data)
             auth.send_email_verification(session["uid"])
             for i in attributes:
