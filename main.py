@@ -32,7 +32,15 @@ def login():
 
 @app.route("/donor", methods = ["POST", "GET"])
 def donor():
-    if person["is_logged_in"]:
+    try:
+        if session["is_logged_in"] == True:
+            pass
+    except:
+        for x in person.keys():
+            session[x] = person[x]
+        session["is_logged_in"] = False
+        return redirect("/")
+    if session["is_logged_in"]:
         if request.method == "POST":
             result = request.form
             title = result["title"]

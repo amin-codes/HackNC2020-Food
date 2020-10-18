@@ -10,12 +10,6 @@
             font-size: 200px;
         }
     </style>
-    <script>
-        var static = {{static}}
-        if (static.equals("True")){
-            document.getElementById("static").checked = true
-        }
-    </script>
 </head>
 <body>
 <div class="wrapper fadeInDown">
@@ -43,5 +37,11 @@
 
   </div>
 </div>
+<script>
+    var static = "{{static}}"
+    if (static == "True"){
+        document.getElementById("static").checked = true
+    }
+</script>
 </body>
 </html>
